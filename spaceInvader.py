@@ -32,6 +32,16 @@ player.setheading(90)
 
 playerspeed = 15
 
+#create invaders
+enemy = turtle.Turtle()
+enemy.color('red')
+enemy.shape('circle')
+enemy.penup()
+enemy.speed(0)
+enemy.setposition(-200,250)
+
+enemyspeed = 2
+
 # move to right and left
 def move_left():
 	x = player.xcor() - playerspeed
@@ -50,7 +60,19 @@ turtle.Screen().listen()
 turtle.Screen().onkey(move_left,'Left')
 turtle.Screen().onkey(move_right,'Right')
 
+# main game loop
+while True:
 
+	x = enemy.xcor() + enemyspeed
+	enemy.setx(x)
+	if enemy.xcor() > 280:
+		enemyspeed *= -1
+		y = enemy.ycor() - 40
+		enemy.sety(y)
+	if enemy.xcor() < -280:
+		enemyspeed *= -1
+		y = enemy.ycor() - 40
+		enemy.sety(y)
 
 
 turtle.mainloop()
