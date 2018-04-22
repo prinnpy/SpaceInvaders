@@ -30,7 +30,25 @@ player.speed(0)
 player.setposition(0,-250)
 player.setheading(90)
 
+playerspeed = 15
 
+# move to right and left
+def move_left():
+	x = player.xcor() - playerspeed
+	if x < -280:
+		x = -280
+	player.setx(x)
+
+def move_right():
+	x = player.xcor() + playerspeed
+	if x > 280:
+		x = 280
+	player.setx(x)
+
+# create keyboard binding
+turtle.Screen().listen()
+turtle.Screen().onkey(move_left,'Left')
+turtle.Screen().onkey(move_right,'Right')
 
 
 
