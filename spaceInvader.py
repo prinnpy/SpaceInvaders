@@ -104,11 +104,13 @@ def move_right():
 def fire_bullet():
 	global bulletstate
 	if bulletstate == 'Ready':
+		os.system('afplay ./sounds/laser.wav&')
 		bulletstate = 'Fire'
 		x = player.xcor()
 		y = player.ycor() + 10
 		bullet.setposition(x,y)
 		bullet.showturtle()
+
 
 def isCollision(t1,t2):
 	distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(),2) + math.pow(t1.ycor()-t2.ycor(),2))
@@ -140,6 +142,7 @@ while True:
 				e.sety(y)
 			enemyspeed *= -1
 		if isCollision(bullet,enemy):
+			os.system('afplay ./sounds/explosion.wav&')
 			bullet.hideturtle()
 			bulletstate = 'Ready'
 			bullet.setposition(0,-400)
