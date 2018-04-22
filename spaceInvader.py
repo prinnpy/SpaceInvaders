@@ -7,7 +7,7 @@ import random
 wn = turtle.Screen()
 wn.bgcolor('black')
 wn.title('Space Invader')
-wn.bgpic('./images/giphy.gif')
+wn.bgpic('./images/bg.gif')
 
 # register shape
 turtle.register_shape('./images/invader.gif')
@@ -82,9 +82,6 @@ bullet.hideturtle()
 
 bulletspeed = 20
 
-# bullet state
-# ready to fire
-
 # fire
 bulletstate = 'Ready'
 
@@ -101,17 +98,18 @@ def move_right():
 		x = 280
 	player.setx(x)
 
+#fire bullet
 def fire_bullet():
 	global bulletstate
 	if bulletstate == 'Ready':
-		os.system('afplay ./sounds/laser.wav&')
+		os.system('afplay ./sounds/lasersound.wav&')
 		bulletstate = 'Fire'
 		x = player.xcor()
 		y = player.ycor() + 10
 		bullet.setposition(x,y)
 		bullet.showturtle()
 
-
+#collision functions
 def isCollision(t1,t2):
 	distance = math.sqrt(math.pow(t1.xcor()-t2.xcor(),2) + math.pow(t1.ycor()-t2.ycor(),2))
 	if distance < 15:
@@ -128,6 +126,7 @@ turtle.Screen().onkey(fire_bullet, 'space')
 # main game loop
 while True:
 
+	# loop through all enemies
 	for enemy in enemies:
 		x = enemy.xcor() + enemyspeed
 		enemy.setx(x)
@@ -142,7 +141,7 @@ while True:
 				e.sety(y)
 			enemyspeed *= -1
 		if isCollision(bullet,enemy):
-			os.system('afplay ./sounds/explosion.wav&')
+			os.system('afplay ./sounds/ex.wav&')
 			bullet.hideturtle()
 			bulletstate = 'Ready'
 			bullet.setposition(0,-400)
@@ -154,7 +153,7 @@ while True:
 			score_pen.clear()
 			score_pen.write(scorestring,False,align='left',font=('Arial',14,'normal'))
 
-
+		#if enemy hit player
 		if isCollision(enemy,player):
 			player.hideturtle()
 			enemy.hideturtle()
@@ -170,6 +169,6 @@ while True:
 		bullet.hideturtle()
 		bulletstate = 'Ready'
 
-
+#make sure to keep game window open
 turtle.mainloop()
 delay = raw_input('Press enter to quit game')
