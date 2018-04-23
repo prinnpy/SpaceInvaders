@@ -1,4 +1,4 @@
 # SpaceInvaders
-> Classic game of space invaders
+> Classic Space Invaders
 
 ![alt text](https://github.com/prinnpy/SpaceInvaders/blob/master/SpaceInvaderSS.png)
